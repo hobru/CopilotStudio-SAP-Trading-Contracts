@@ -144,9 +144,9 @@ Let’s see how responses to general questions now behave with changes to instru
 5. Ensure that the instructions are behaving correctly by not allowing the user to ask about another company’s products.
 
 ## Exercise 4: Create an action and review a topic
-Microsoft Copilot Studio makes it easy to integrate with various 1st and 3rd party systems both generatively and directly via either the 1600+ out of the box Power Platform Connectors or embedded Power Automate Cloud flows in the form of configured actions. Topics allow for another level of prescribed flow and logic to control conversation paths further. In this exercise, we will extend upon an existing Store Operations topic to lookup an order status directly out of a SAP system.
+Microsoft Copilot Studio makes it easy to integrate with various 1st and 3rd party systems both generatively and directly via either the 1600+ out of the box Power Platform Connectors or embedded Power Automate Cloud flows in the form of configured actions. Topics allow for another level of prescribed flow and logic to control conversation paths further.
 
-### Step 1: Create an order lookup action
+### Step 1: Create an trading lookup action
 When you turn on generative mode, your copilot can automatically select the most appropriate action or topic, to respond to a user at runtime. In classic mode, a copilot can only use topics to respond to the user. However, you can still design your copilot to call actions explicitly from within topics.
 
 Actions are based on one of the following core action types:
