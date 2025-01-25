@@ -29,10 +29,14 @@ To avoid conflicting with your existing logged-in experiences, you can do this w
 1.	Set up a new work profile specific to that workshop 
 2.	Or browse as a guest.
 3.	Or start an InPrivate session.
+![New Private Windows](images/NewInPrivateWindows.jpg)
+
 
 ## Step 2: Log into Copilot Studio
 1.	Navigate to [aka.ms/CopilotStudioStart](https://aka.ms/CopilotStudioStart) 
 2.	Enter the provided user name, click Next
+![First Sign-In](images/FirstSignIn.jpg)
+
 3.	Enter the provided password, click Sign in
 4.	If prompted, choose whether to stay signed in.
 5.	The first time you access Microsoft Copilot Studio, you’ll be prompted to choose your country/region. You can choose a value or leave the default option and click Get Started.
@@ -40,19 +44,23 @@ To avoid conflicting with your existing logged-in experiences, you can do this w
 ## Step 3: Create a copilot from template
 
 1.	From the Microsoft Copilot Studio Home page, Explore Agents and click Website Q&A Copilot.
+![SelectQ&A](images/WebsiteQA.jpg)
 2.	You will get redirected to an experience to further customize your copilot before creating. To ensure uniqueness and avoiding conflicts with others in this environment, only update the default Name by suffixing your Initial and Last Name to the end (e.g. Website Q&A Copilot-hobruche)
 3.	Click Create at the top right corner and wait a few minutes until the copilot is fully created noted by the Description and Instructions no longer showing Loading. 
+![Create Agent](images/Create.jpg)
 
 > [!Note]
 > Sometimes the Copilot creation takes a little bit longer and you get a message to wait for an email, normally it comes back as created after few mins.
 
 4.	Test your copilot by clicking some of the prompts like "What can you tell me about Copilot Studio".
+![First Question](images/FirstQuestion.jpg)
 5.	Congrats, you just created and deployed your first generative AI Website Q&A copilot!
 
 
 # Exercise 2: Take a quick tour of the user interface
 Microsoft Copilot Studio makes it easier for you to build basic to advanced Copilots. The following section reviews the main pages of the maker experience for Microsoft Copilot Studio.
 ## Main interface
+![Copilot Studio Overview](images/CopilotStudioOverview.jpg)
 A.	*Home* – Displays Microsoft Copilot Studio home page. This is the page where you initially landed. You can start creating new copilots from here, it contains the list of recent copilots, a list of templates to avoid creating new copilots from scratch, as well as learning resources. 
 Create – This menu gets you to the conversational copilot creation experience.
 
@@ -86,30 +94,31 @@ F.	*Publish* – Where you can make the latest version of your copilot available
 
 *Settings* – Where you can managed your copilot configuration (advanced settings, security, language, etc.)
 
-G.	Test your agent – The test pane allows you to immediately test your agent/copilot and your customizations, even without needing to save.
+G.	*Test your agent* – The test pane allows you to immediately test your agent/copilot and your customizations, even without needing to save.
 
 ## Settings interface
-1. *Agent details* – Where you can update the copilot display name, icon
+![Settings](images/Settings.jpg)
+(1) *Agent details* – Where you can update the copilot display name, icon
 
-2. *Generative AI* – Where you can choose to replace the more classic natural language understanding approach for topic triggering and entity extraction with one that’s based on a large language model to do multi-intent detection and more complex entity extraction. This is also where you can configure content moderation setting for knowledge sources (to reduce risks of hallucinations).
+(2) *Generative AI* – Where you can choose to replace the more classic natural language understanding approach for topic triggering and entity extraction with one that’s based on a large language model to do multi-intent detection and more complex entity extraction. This is also where you can configure content moderation setting for knowledge sources (to reduce risks of hallucinations).
 
-3. *Security* – Where you can share your copilot with other users (to co-author it) or with security groups (to use it). This is also where you configure end-user authentication settings (the type of authentication and whether it is enforced or not), and web channel security, that allows you to further secure the Direct Line channel that is used for any web or custom application deployment.
+(3) *Security* – Where you can share your copilot with other users (to co-author it) or with security groups (to use it). This is also where you configure end-user authentication settings (the type of authentication and whether it is enforced or not), and web channel security, that allows you to further secure the Direct Line channel that is used for any web or custom application deployment.
 
-4. *Authoring Canvas*: Enable Optimized Canvas for topics with a high number of nodes, improving performance and usability.
+(4). *Authoring Canvas*: Enable Optimized Canvas for topics with a high number of nodes, improving performance and usability.
 
-5. *Entities* – Copilot Studio comes with a lot of pre-built entities to help identify key information in a user utterance (e.g. a city, date, number, etc.). This menu is also where you can define your own closed-list entities or regular expression entities.
+(5) *Entities* – Copilot Studio comes with a lot of pre-built entities to help identify key information in a user utterance (e.g. a city, date, number, etc.). This menu is also where you can define your own closed-list entities or regular expression entities.
 
-6. *Skills* – Where you register external Bot Framework skills that your Copilot Studio copilot can call, or where you can configure how existing Azure Service Bot can use your Copilot Studio copilot as a skill.
+(6) *Skills* – Where you register external Bot Framework skills that your Copilot Studio copilot can call, or where you can configure how existing Azure Service Bot can use your Copilot Studio copilot as a skill.
 
-7. *Voice*: Make sure your agent works for you with voice-first features like advanced speech recognition and dual-tone multi-frequency (DTMF) input
+(7) *Voice*: Make sure your agent works for you with voice-first features like advanced speech recognition and dual-tone multi-frequency (DTMF) input
 
-8. *Languages* – Where you can configure additional languages your copilot can be used in and localized into.
+(8) *Languages* – Where you can configure additional languages your copilot can be used in and localized into.
 
-9. *Language understanding* – Where you can configure custom language models developed and trained on Azure AI Language, in Azure Conversational Language Understanding (CLU). When configured, this effectively replaces the out-of-the-box natural language understanding model (NLU) for intent detection, and can also replace entity detection and extraction.
+(9) *Language understanding* – Where you can configure custom language models developed and trained on Azure AI Language, in Azure Conversational Language Understanding (CLU). When configured, this effectively replaces the out-of-the-box natural language understanding model (NLU) for intent detection, and can also replace entity detection and extraction.
 
-10. *Component collection*: Component collections can be used by multiple agents
+(10) *Component collection*: Component collections can be used by multiple agents
 
-11. *Advanced*: To modify advanced settings (e.g. configure the Azure Application Insights integration, metadata or define solution)
+(11) *Advanced*: To modify advanced settings (e.g. configure the Azure Application Insights integration, metadata or define solution)
 
 ## Exercise 3: Update instructions & knowledge sources
 ### Step 1: Change knowledge sources
@@ -126,13 +135,29 @@ Knowledge in Microsoft Copilot Studio allows you to add enterprise data from Pow
 | Enterprise data via graph connections | xxx | xxx | xxx | xxx |
 
 1. Navigate to the Knowledge tab of your copilot
-2. Select the 3 dot ellipsis next to each of the knowledge sources and choose Delete, once again confirming to delete when prompted. 
-3. Click on Browse
+![Knowledge Tab](images/Knowledge.jpg)
+2. Select the 3 dot elipsis next to the existing Microsoft knowledge sources and choose Delete, once again confirming to delete when prompted. 
+![Delete Knowledge Source](images/DeleteKS.jpg)
+3. Click on *+ Add knowledge* 
+![Add new knowledge](images/AddKnowledge.jpg)
+4. Click on *Browse* 
+![Browse for content](images/BrowseContent.jpg)
+5. Select *Files*
+![Select Files](images/SelectFiles.jpg)
+6. Click on *Add*
+![Add Files](images/ClickOnAdd.jpg)
+
+
+
 
 ### Step 2: Turn off the ability for copilot to use it’s own general knowledge
 We would like to get answers from the defined knowledge based only
 1. Go to the Overview pane and click on the Allow the AI to use its own general knowledge option
+![Unable GenAI Content](images/UnableKnowledge.jpg)
+
 2. Click continue in the Disabling the default AI knowledge warning
+![Confirm](images/ConfirmDisable.jpg)
+
 3. It should be now Disabled 
 
 ### Step 3: Test the changes
@@ -217,9 +242,13 @@ In this case, though, we are actually going to disable the Track order topic and
 2. Observe the types of nodes that came preconfigured as part of the template to surface order details in a programmatic and predictive way:
 
 a. *Trigger Phrases* – utterances that would trigger this topic such as track order
+
 b. *Question* – to capture information like order number and store in a variable response
+
 c. *Action* – placeholder to query SAP order details using that captured order number either using a flow or connector action
+
 d. *Set Variable* – to ultimately parse a JSON response into structured objects making data accessible for further processing
+
 e. *Message (Adaptive Card)* – to post a small UX experience summarizing order data elements
 
 3. Click on Topics again and choose to disable the Track order topic
