@@ -164,6 +164,7 @@ We would like to get answers from the defined knowledge based only
 Let’s see how responses to general questions now behave with changes to instructions and public knowledge sources that align to the uploaded documents
 1. Launch the Test pane
 2. Ask a question that doesn’t match an existing topic to trigger the Conversational boosting topic.
+![Second question](images/SecondQuestion.jpg)
 3. Notice that it generates an answer and includes citations to ground its answer on and offer the user the option to navigate to the sources that were used to generate this answer.
 4. Ask a follow-up question regarding policies and support
 5. Ensure that the instructions are behaving correctly by not allowing the user to ask about another company’s products.
@@ -188,50 +189,171 @@ Actions can generate a contextual response to a user's query, using the results 
 
 In this first task, you manually create a new action by following these steps:
 1. Select Actions 
+![Add action](images/AddAction.jpg)
+2. Enter *OData* and select the *Query OData entities* action
+![Add Query action](images/AddActionOData.jpg)
+3. Click on the three dots and select *Add new connection*
+![Add new Connection](images/AddNewConnection.jpg)
+
+
+
+
+
+
+Possible questions:
+Show me a list of trading documents in the SAP system
+show me only the document number
+How many trading contracts did we have in Feburary 2024
+Which trading contracts have a sales quantity above 300
+
+Anzahl der Trading Kontrakte im März 2024
+Welcher Trading Kontrak hat eine Sales Quantity über 200
+
+
+
+
+### Step 2: Create more complex Power Automate Flow Actions
+
 2. Choose + Add an action
+![Add an Action](images/AddAnAction.jpg)
+
 3. Scroll down and choose Create a new flow which will launch make.powerautomate.com
+![New Power Automate Flow](images/NewPowerAutomateFlow.jpg)
+
 4. Rename your flow title, by clicking on upper left and renaming it to Get Tradingcontract <YOURNAME>.
-5. Select on the Run a flow from Copilot trigger step and select to + Add an input
-6. Select Text as the type and update the name to be TradingcontractNumber and description to be *Unique number for the trading contract of the new parameter*
-7. Choose the + icon between the Run a flow from Copilot and Respond to Copilot and select to Add an action
-8. Search for SAP, from the SAP OData connector select Read OData entity
+![New Power Automate Flow](images/ChangeFlowname.jpg)
+
+5. Choose the + icon between the Run a flow from Copilot and Respond to Copilot and select to Add an action
+![Add New Action](images/AddNewAction.jpg)
+
+8. Search for SAP, from the SAP OData connector select Query OData entity
+![Query SAP OData](images/QueryOData.jpg)
+
+If required, click on *Change Connection Reference* and *Add New*
+![Change Connection Reference](images/ChangeConnectionReference.jpg)
+![Add new](images/AddNew.jpg)
+
 9. Choose Add new connection, enter the details bellow and then click Create New
-* Connection Name Tradingcontract<YOURNAME>
-* Authentication Type: Anonymous
-* OData Base URI through BTP: xxx
-* API Name: from the pre-requisites step
-* API Key: from the pre-requisites step
+
+|Property|Value|
+|---|---|
+|Connection Name|Tradingcontract-<YOURNAME>|
+|Authentication Type|Anonymous|
+|OData Base URI through Azure APIM|https://api.integration-ninjas.co.in/adventas/graph/api/s4hadv/my.s4/|
+|API Name|API-Key|
+|API Key|will be handed out|
+
+![Create Connection](images/CreateConnection.jpg)
 
 10. In the OData Entity Name choose zFD-Trading Contract
-11. Since this OData service currently does not support *Get Details* we will add a query that allows us to filter for a specific trading contract
+![Select Entity](images/Selectzp_gtcf_FrameContract.jpg)
+
+> [!TIP]
+> Since this OData service currently does not support *Get Details* and also does not contain hundreds of contracts, we will just query the full list. 
 
 12. Choose Save draft and then Publish from the menu bar
+![Save and Publish](images/SaveAndPublish.jpg)
+
 13. Test the flow by choosing Test from the menu bar
+![Select manually](images/TestFlow-Manually.jpg)
+
 Choose Manually as method to test the flow, click Test
-Enter xxx as the TradingContractNumber and choose Run Flow
+![Select manually](images/TestFlow-Manually.jpg)
+
+![Run Test Flow](images/RunTestFlow.jpg)
+
+> [!TIP]
+> If it doesn't work and the wheel keeps spinning, just click on Cancel and try again. 
+
+
 Click Done and you should see the successfully run. Select the Read OData entity action and look at the body
-14. Copy the body by clicking the icon below
-15. Click on the Edit button to edit the flow
-16. Select the + sign between the Read OData entity and the Respond to Copilot action and add a Parse JSON action
-17. In the Parse JSON action, select Use sample payload to generate schema and paste the body you copied from the run, select Done
-18. In the Content parameter choose the body from the Read OData entity action. If you don’t see it choose See more to display all the parameters.
+![Click on Done](images/DoneFlow.jpg)
+
+14. Look at the body and click on the Edit button to edit the flow
+![Edit the Flow](images/CopyBody.jpg)
+
+
 19. Select on the Respond to Copilot trigger step and select to + Add an output
-20. Select Text as the type and update the name to be *TradingContractDetails*, for value select the lightening icon on right and select Body from the Parse JSON action which contains the SAP response in JSON format. In the description enter Contains trading contract details
-Note: Make sure you choose the Body under the Parse JSON action.
+![Add an Output](images/AddAnOutput.jpg)
+
+20. Select Text as the type 
+![Select Text](images/SelectText.jpg)
+
+and update the name to be *TradingContractDetails*, 
+![Enter Parameter Name](images/EnterParameterName.jpg)
+
+for value select the lightening icon on right and select Body from the *Query OData entities*. 
+In the description enter "Retrieve a list of trading contracts and their status from the SAP system"
+
+
 21. Choose Save draft and then Publish from the menu bar 
+![Enter Description, Save as Draft and Publish](images/DescriptionDraftPublish.jpg)
+
 22. Optionally you can test again the flow by choosing Test from the menu bar
 Choose Manually as method to test the flow, click Test
-Enter xxx as the TradingContractNumber and choose Run Flow
 Click Done and you should see the successfully run. Select the Read OData entity action and look at the body
+
 23. Click Back to go to the Flow overview page 
+![Click on Back](images/ClickOnBack.jpg)
+
+
 24. On the right side of the screen scroll down until you find the Run only Users and choose Edit. 
-25. Choose your connection name and click OK in the warning:
-26. Save
-27. Go back to Copilot Studio and refresh the browser
-28. Select to + Add an action again
-29. Search on the flow you just created Get SAP Trading Contract <YOUR NAME> and select it
-30. Select Next leaving the default Inputs and Outputs inherited from the flow.
-31. Select Finish after all 3 steps have been completed
+![Edit Run Only Users](images/RunOnlyUsersEdit.jpg)
+
+25. Choose your connection name and click OK in the warning. Then click on Save
+![Select Connection and Save](images/SelectOKSave.jpg)
+
+
+27. Go back to Copilot Studio and Click on Refresh
+![Click on Refresh](images/ClickOnRefresh.jpg)
+
+> [!TIP]
+> If your Flow does not show up, then cancel and perform the following steps again:
+> Select to + Add an action again
+
+
+28. Search on the flow you just created *Get Tradingcontract-<YOUR NAME>* and select it
+![Select the new flow](images/SelectTheNewFlow.jpg)
+
+29. Leave teh Name as is, but add the following text to the *Description for the agent to know when to use this action*. Then click on *Add Action*
+
+
+Description for the agent to know then to use this action:
+```text
+This action retrieves a list of trading contracts and their status from the SAP system. As a results of this query you get an array of multiple trading documents. For each trading document, you get the Trading Document number, the Document item, the trading document type, the products, the trading document item text, the product group, the plant, the trading sales quantity, the unit and the Open Sales Quantities and the creation date. Each element looks like this:
+{
+  "TradingDocument": "3110000000",
+  "TradingDocumentItem": "10",
+  "createCalloff_ac": true,
+  "TradingDocumentType": "ZS11",
+  "Product": "2224",
+  "TrdgDocItemText": "Glycol",
+  "ProductGroup": "L001",
+  "Plant": "DE01",
+  "CreatedByUser": "PLANGNER",
+  "CreationDate": {
+    "Year": 2024,
+    "Month": 2,
+    "Day": 6
+  },
+  "CreationTime": {
+    "Hours": 5,
+    "Minutes": 53,
+    "Seconds": 10,
+    "Milliseconds": 0,
+    "Ticks": 211900000000
+  },
+  "TrdgDocSalesQuantity": 240,
+  "TrdgDocSlsQuantityUnit": "MT",
+  "OpenSalesQuantity": 0
+}
+```
+![Add Description](images/AddDescription.jpg)
+
+> Select Next leaving the default Inputs and Outputs inherited from the flow.
+> Select Finish after all 3 steps have been completed
+
+
 
 ## Step 2: Review and disable the track order topic
 Where you manage custom and system topics. Topics are the core building blocks of a copilot. Topics can be seen as the copilot competencies: they define how a conversation dialog plays out. Topics are discrete conversation paths that, when used together, allow for users to have a conversation that feels natural and flows appropriately.
