@@ -45,12 +45,12 @@ To avoid conflicting with your existing logged-in experiences, you can do this w
 
 1.	From the Microsoft Copilot Studio Home page, Explore Agents and click Website Q&A Copilot.
 ![SelectQ&A](images/WebsiteQA.jpg)
-2.	You will get redirected to an experience to further customize your copilot before creating. To ensure uniqueness and avoiding conflicts with others in this environment, only update the default Name by suffixing your Initial and Last Name to the end (e.g. Website Q&A Copilot-hobruche)
+2.	You will get redirected to an experience to further customize your copilot before creating. To ensure uniqueness and avoiding conflicts with others in this environment, only update the default Name by suffixing your Initial and Last Name to the end (e.g. *Website Q&A Copilot-hobruche*)
 3.	Click Create at the top right corner and wait a few minutes until the copilot is fully created noted by the Description and Instructions no longer showing Loading. 
 ![Create Agent](images/Create.jpg)
 
 > [!Note]
-> Sometimes the Copilot creation takes a little bit longer and you get a message to wait for an email, normally it comes back as created after few mins.
+> Sometimes the Copilot creation takes a little bit longer and you get a message to wait for an email, normally it comes back as created after few minutes. Feel free to check the emails in [Outlook](https://outlook.office.com/), messages in [Teams](https://teams.microsoft.com/go#) (in the browser) and [Power Automate](https://make.powerautomate.com/) which we will use later. 
 
 4.	Test your copilot by clicking some of the prompts like "What can you tell me about Copilot Studio".
 ![First Question](images/FirstQuestion.jpg)
@@ -163,10 +163,13 @@ We would like to get answers from the defined knowledge based only
 ### Step 3: Test the changes
 Let’s see how responses to general questions now behave with changes to instructions and public knowledge sources that align to the uploaded documents
 1. Launch the Test pane
-2. Ask a question that doesn’t match an existing topic to trigger the Conversational boosting topic.
+2. Ask a question from the Document that you have uploaded, e.g. *Was sind die Hauptanbaugebiete von Naturkautschuk?*
 ![Second question](images/SecondQuestion.jpg)
+> [!Note]
+> Make sure that the Status of the uploaded document is actually "Ready"
+
 3. Notice that it generates an answer and includes citations to ground its answer on and offer the user the option to navigate to the sources that were used to generate this answer.
-4. Ask a follow-up question regarding policies and support
+4. Upload additional documents and ask further questions. 
 5. Ensure that the instructions are behaving correctly by not allowing the user to ask about another company’s products.
 
 ## Exercise 4: Create an action and review a topic
@@ -185,42 +188,13 @@ Actions are based on one of the following core action types:
 
 Each core action has additional information that describes its purpose, allowing the copilot to use generative AI to generate questions. These questions are required to fill the inputs needed to perform the action. Therefore, you don't need to manually author question nodes to gather all inputs needed, such as the inputs on a flow. Inputs are handled for you during runtime.
 
-Actions can generate a contextual response to a user's query, using the results of the action. Alternatively, you can explicitly author a response for the action.
-
-In this first task, you manually create a new action by following these steps:
-1. Select Actions 
-![Add action](images/AddAction.jpg)
-2. Enter *OData* and select the *Query OData entities* action
-![Add Query action](images/AddActionOData.jpg)
-3. Click on the three dots and select *Add new connection*
-![Add new Connection](images/AddNewConnection.jpg)
-
-
-
-
-
-
-Possible questions:
-Show me a list of trading documents in the SAP system
-show me only the document number
-How many trading contracts did we have in Feburary 2024
-Which trading contracts have a sales quantity above 300
-
-Anzahl der Trading Kontrakte im März 2024
-Welcher Trading Kontrak hat eine Sales Quantity über 200
-
-
-
-
-### Step 2: Create more complex Power Automate Flow Actions
-
-2. Choose + Add an action
+1. Choose + Add an action
 ![Add an Action](images/AddAnAction.jpg)
 
-3. Scroll down and choose Create a new flow which will launch make.powerautomate.com
+2. Scroll down and choose *Create a new Power Automate* which will launch make.powerautomate.com
 ![New Power Automate Flow](images/NewPowerAutomateFlow.jpg)
 
-4. Rename your flow title, by clicking on upper left and renaming it to Get Tradingcontract <YOURNAME>.
+4. Rename your flow title, by clicking on upper left and renaming it to *Get Tradingcontract-\<YOURNAME\>*.
 ![New Power Automate Flow](images/ChangeFlowname.jpg)
 
 5. Choose the + icon between the Run a flow from Copilot and Respond to Copilot and select to Add an action
@@ -237,7 +211,7 @@ If required, click on *Change Connection Reference* and *Add New*
 
 |Property|Value|
 |---|---|
-|Connection Name|Tradingcontract-<YOURNAME>|
+|Connection Name|Tradingcontract-\<YOURNAME\>|
 |Authentication Type|Anonymous|
 |OData Base URI through Azure APIM|https://api.integration-ninjas.co.in/adventas/graph/api/s4hadv/my.s4/|
 |API Name|API-Key|
@@ -350,47 +324,46 @@ This action retrieves a list of trading contracts and their status from the SAP 
 ```
 ![Add Description](images/AddDescription.jpg)
 
-> Select Next leaving the default Inputs and Outputs inherited from the flow.
+> [!TIP]
+> Creatingn the a good description is important. Via this description Copilot Studio decides which action to call when a user asks a questions.
+
+Select Next leaving the default Inputs and Outputs inherited from the flow.
 > Select Finish after all 3 steps have been completed
 
+30. Once the Action is successfully added, click on the 
+![Enable Generative AI](images/GenerativeAI.jpg)
+
+31. Select *Generative (Preview)*, click on *Save* and close the Setting screen.
+![Enable Generative](images/EnableAI.jpg)
 
 
-## Step 2: Review and disable the track order topic
-Where you manage custom and system topics. Topics are the core building blocks of a copilot. Topics can be seen as the copilot competencies: they define how a conversation dialog plays out. Topics are discrete conversation paths that, when used together, allow for users to have a conversation that feels natural and flows appropriately.
 
-In this case, though, we are actually going to disable the Track order topic and rely more heavily on generative AI to plan and summarize the right action. There are multiple advantages to this as well as some disadvantages.
 
-1. Select Topics and then select Track order
-2. Observe the types of nodes that came preconfigured as part of the template to surface order details in a programmatic and predictive way:
 
-a. *Trigger Phrases* – utterances that would trigger this topic such as track order
 
-b. *Question* – to capture information like order number and store in a variable response
-
-c. *Action* – placeholder to query SAP order details using that captured order number either using a flow or connector action
-
-d. *Set Variable* – to ultimately parse a JSON response into structured objects making data accessible for further processing
-
-e. *Message (Adaptive Card)* – to post a small UX experience summarizing order data elements
-
-3. Click on Topics again and choose to disable the Track order topic
-
-## Step 3: Test looking up order details
-Let’s see if you can lookup the status of an order directly from an SAP system now using this new action and extended topic.
+## Step 3: Test looking up trading contracts
+Let’s see if you can query some information about trading contracts. 
 1. Launch the Test pane
-2. Ask a question to check on the status of an trading contract.
-Ask other questions about some orders. Some other valid order numbers:
-* xxx
-* xx
-* xx
-* x
-* ...
-* xx
+![Toggle Test Pane](images/SelectTestPane.jpg)
 
-Sample Questions:
+2. Ask a question to check how many trading contracts are in the system:
+````text
+How many trading contracts do we have in the system?
+````
+![How many trading contracts](images/HowManyTrading.jpg)
 
-•	what's the overall trading contract xxx value?
-•	Give me order details for order 0500000007
+> [!TIP]
+> Notice how the bug screen shows you what action or triggers have been executed. 
+
+3. Test with other questions:
+
+* how many trading contracts do we have in our system?
+* what's the overall trading contract value?
+* Give me details on trading contract 3110000001
+
+> [!TIP]
+> Since we did not specify the description of the knowledge source, this can lead to confusion. Either optimise the description or -- for this test -- delete the added content
+ > ![Remove knoweldge source](images/RemoveKnowledgeSource.jpg)
 
 3. Observe the generative response on trading contract data retrieved from SAP real time
 
@@ -403,12 +376,14 @@ There are 3 configurable means for copilots to authenticate:
 * *Authenticate with Microsoft* – Entra ID authentication in Teams and Power Apps often used for internal deployments using Microsoft 1rst party workloads
 * *Authenticate manually* – used for either external means and/or authenticating with other 3rd party workloads
 
-The Store Operations templates ships by default with Authenticate with Microsoft enabled to support seamless integration with Teams.
-
 1. Go to Settings in the top-right navigation
-2. Go to Security 
-3. Select Authentication
-4. Validate Authenticate with Microsoft is selected
+![Go to Settings](images/GoToSettings.jpg)
+
+2. Go to Security -> Authentication
+![Go to Settings](images/Security-Authentication.jpg)
+
+3. Validate Authenticate with Microsoft is selected
+![Authenticate with Microsoft](images/AutheWithMSFT.jpg)
 
 ## Step 2: Publish the copilot
 Publishing is where you can make the latest version of your copilot available to your users. Apart from the test pane, changes are not reflected to your end-users as long as you have not published the copilot. Publishing is different than making the copilot available in a channel as seen in the next step.
@@ -416,29 +391,34 @@ Publishing is where you can make the latest version of your copilot available to
 We need to publish all the changes we have made from the default Store Operations template to this point.
 
 1. Select Publish in the top-right navigation and confirm to publish
+![Publish Copilot](images/Publish.jpg)
 
 ## Step 3: Configure Microsoft Teams publishing channel
-Channels are where you configure how your copilot is being made available to your users (e.g. Teams, website, etc.). Multiple channels are available to support hosting your copilot experience. By default, the Stores Operations template ships with the Microsoft Teams channel to support a retail store employee’s experience. Depending on the tenant’s governance model, the Copilot Studio Maker will need to work with their Teams tenant administrator to make it available for the whole org to use.
+Channels are where you configure how your copilot is being made available to your users (e.g. Teams, website, etc.). Multiple channels are available to support hosting your copilot experience. By default, this template ships with the Microsoft Teams channel. Depending on the tenant’s governance model, the Copilot Studio Maker will need to work with their Teams tenant administrator to make it available for the whole org to use.
 
-1. Go to Channels in the top navigation
-2. Select Microsoft Teams
+1. Go to Channels in the top navigation and select Microsoft Teams
+![Select Teams](images/Channels-Teams.jpg)
+
+
 3. Select Turn on Teams
+![Turn on Teams](images/TurnOnTeams.jpg)
+
 4. Select Availability options
+![Availabilty Options](images/AvailabilityOptions.jpg)
+
 5. Select Copy link
+![Copy Link](images/CopyLink.jpg)
+
 6. Open another tab in the same browser session that you are currently logged in under, paste the link
-7. Click to Cancel on the open application dialog
-8. Select to Use the web app instead
+
+> [!TIP]
+> You might need to manually select "Use the web app instead"
 9. Select Add
 
-## Step 4: Test the experience in Teams
-Test the experience from a retail store employee (e.g. C2) perspective in Teams by executing many of the same prompts used in previous lab steps.
-
-1. Possible prompts to test:
-* What deals are available today?	
-* What is the policy on refunds?	
-* What is the status of order 0500000007?	
-* Does PlayStation have good deals right now?
+10. Now you can interact with the agent directly from Teams
+![Agent in Teams](images/Inteams.jpg)
 
 Congratulations, you've now built and published your first copilot! 
 
-
+# Exercise 6: Test the same with other SAP OData Services
+The SAP ES5 System provides an easy access to SAP OData services. Get a P-User and test the service using this URL: https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/
