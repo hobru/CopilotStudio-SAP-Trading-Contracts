@@ -1,8 +1,9 @@
 # Copilot Studio & SAP - Trading Contracts
 Getting started with Copilot Studio and SAP
 
-This tutorial walks through two simple scenarios:
-* Knowledge Grounding with documents you can upload
+This tutorial walks through three simple scenarios:
+* knowledge grounding with a simple website
+* knowledge grounding with documents you can upload
 * Reading and interacting with data from an SAP system exposed via SAP OData. In this specific case we are leveraging a service that returns information about Trading Contracts
 
 ## Create & configure a SAP Copilot in Microsoft Copilot Studio
