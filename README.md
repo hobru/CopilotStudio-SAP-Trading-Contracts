@@ -1,5 +1,10 @@
 # CopilotStudio SAP
 Getting started with Copilot Studio and SAP
+
+This tutorial walks through two simple scenarios:
+* Knowledge Grounding with documents you can upload
+* Reading and interacting with data from an SAP system exposed via SAP OData. In this specific case we are leveraging a service that returns information about Trading Contracts
+
 ## Create & configure a SAP Copilot in Microsoft Copilot Studio
 ## Prerequisites
 ### Power Platform Environment
@@ -24,11 +29,9 @@ In this step, you will use the provided credentials to log into Microsoft Copilo
 
 ## Step 1: Setup your browser experience
 
-To avoid conflicting with your existing logged-in experiences, you can do this workshop by using one of these 3 options:
+The easiest way to go through this workshop is to open up a browser in a Private window:
 
-1.	Set up a new work profile specific to that workshop 
-2.	Or browse as a guest.
-3.	Or start an InPrivate session.
+
 ![New Private Windows](images/NewInPrivateWindows.jpg)
 
 
@@ -43,16 +46,16 @@ To avoid conflicting with your existing logged-in experiences, you can do this w
 
 ## Step 3: Create a copilot from template
 
-1.	From the Microsoft Copilot Studio Home page, Explore Agents and click Website Q&A Copilot.
+1.	From the Microsoft Copilot Studio Homepage, Explore Agents and click Website Q&A Copilot.
 ![SelectQ&A](images/WebsiteQA.jpg)
-2.	You will get redirected to an experience to further customize your copilot before creating. To ensure uniqueness and avoiding conflicts with others in this environment, only update the default Name by suffixing your Initial and Last Name to the end (e.g. *Website Q&A Copilot-hobruche*)
+2.	Update the default Name by suffixing a unique name to the end (e.g. *Website Q&A Copilot-hobruche*)
 3.	Click Create at the top right corner and wait a few minutes until the copilot is fully created noted by the Description and Instructions no longer showing Loading. 
 ![Create Agent](images/Create.jpg)
 
 > [!Note]
 > Sometimes the Copilot creation takes a little bit longer and you get a message to wait for an email, normally it comes back as created after few minutes. Feel free to check the emails in [Outlook](https://outlook.office.com/), messages in [Teams](https://teams.microsoft.com/go#) (in the browser) and [Power Automate](https://make.powerautomate.com/) which we will use later. 
 
-4.	Test your copilot by clicking some of the prompts like "What can you tell me about Copilot Studio".
+4.	Test your Copilot by clicking some of the prompts like "What can you tell me about Copilot Studio".
 ![First Question](images/FirstQuestion.jpg)
 5.	Congrats, you just created and deployed your first generative AI Website Q&A copilot!
 
@@ -127,12 +130,11 @@ Knowledge in Microsoft Copilot Studio allows you to add enterprise data from Pow
 #### Supported knowledge sources
 | Name | Source | Description | Number of inputs supported in general answers | Authentication |
 | --- | --- | --- | --- | --- |
-| Public Website | xxx | xxx | xxx | xxx |
-| Documents | xxx | xxx | xxx | xxx |
-| SharePoint | xxx | xxx | xxx | xxx |
-| OneDrive for Business | xxx | xxx | xxx | xxx |
-| Dataverse | xxx | xxx | xxx | xxx |
-| Enterprise data via graph connections | xxx | xxx | xxx | xxx |
+| Public Website | External | Searches the query input on Bing, only returns results from provided websites | Generative mode: Unlimited Classic mode: Four public URLs (for example, microsoft.com) | None |
+| Documents | Internal | Searches documents uploaded to Dataverse, returns results from the document contents | Generative mode: Unlimited Classic mode: Limited by the Dataverse file storage allocation | None |
+| SharePoint | Internal | Connects to a SharePoint URL, uses GraphSearch to return results | Generative mode: Unlimited Classic mode: Four URLs per generative answers topic node | Agent user's Microsoft Entra ID authentication |
+| Dataverse | Internal | Connects to the configured Dataverse environment and uses a retrieval-augmented generative technique in Dataverse to return results | Generative mode: Unlimited Classic mode: Two Dataverse knowledge sources (and up to 15 tables per knowledge source) | Agent user's Microsoft Entra ID authentication |
+| Enterprise data via graph connections | Internal | Connects to Copilot connectors where your organization data is indexed by Microsoft Search | Generative mode: Unlimited Classic mode: Two per custom agent | Agent user's Microsoft Entra ID authentication |
 
 1. Navigate to the Knowledge tab of your copilot
 ![Knowledge Tab](images/Knowledge.jpg)
@@ -203,9 +205,10 @@ Each core action has additional information that describes its purpose, allowing
 8. Search for SAP, from the SAP OData connector select Query OData entity
 ![Query SAP OData](images/QueryOData.jpg)
 
-If required, click on *Change Connection Reference* and *Add New*
-![Change Connection Reference](images/ChangeConnectionReference.jpg)
-![Add new](images/AddNew.jpg)
+> [!TIP]
+> If required, click on *Change Connection Reference* and *Add New*
+> ![Change Connection Reference](images/ChangeConnectionReference.jpg)
+> ![Add new](images/AddNew.jpg)
 
 9. Choose Add new connection, enter the details bellow and then click Create New
 
@@ -231,54 +234,53 @@ If required, click on *Change Connection Reference* and *Add New*
 13. Test the flow by choosing Test from the menu bar
 ![Select manually](images/TestFlow-Manually.jpg)
 
-Choose Manually as method to test the flow, click Test
+14. Choose Manually as method to test the flow, click Test
 ![Select manually](images/TestFlow-Manually.jpg)
-
 ![Run Test Flow](images/RunTestFlow.jpg)
 
 > [!TIP]
 > If it doesn't work and the wheel keeps spinning, just click on Cancel and try again. 
 
 
-Click Done and you should see the successfully run. Select the Read OData entity action and look at the body
+15. Click Done and you should see the successfully run. Select the Read OData entity action and look at the body
 ![Click on Done](images/DoneFlow.jpg)
 
-14. Look at the body and click on the Edit button to edit the flow
+16. Look at the body and click on the Edit button to edit the flow
 ![Edit the Flow](images/CopyBody.jpg)
 
 
-19. Select on the Respond to Copilot trigger step and select to + Add an output
+17. Select on the Respond to Copilot trigger step and select to + Add an output
 ![Add an Output](images/AddAnOutput.jpg)
 
-20. Select Text as the type 
+18. Select Text as the type 
 ![Select Text](images/SelectText.jpg)
 
-and update the name to be *TradingContractDetails*, 
+19. and update the name to be *TradingContractDetails*. 
+For the value select the lightening icon on right and select Body from the *Query OData entities*. 
+In the description enter "Retrieve a list of trading contracts and their status from the SAP system"
 ![Enter Parameter Name](images/EnterParameterName.jpg)
 
-for value select the lightening icon on right and select Body from the *Query OData entities*. 
-In the description enter "Retrieve a list of trading contracts and their status from the SAP system"
 
 
-21. Choose Save draft and then Publish from the menu bar 
+20. Choose Save draft and then Publish from the menu bar 
 ![Enter Description, Save as Draft and Publish](images/DescriptionDraftPublish.jpg)
 
-22. Optionally you can test again the flow by choosing Test from the menu bar
+21. Optionally you can test again the flow by choosing Test from the menu bar
 Choose Manually as method to test the flow, click Test
 Click Done and you should see the successfully run. Select the Read OData entity action and look at the body
 
-23. Click Back to go to the Flow overview page 
+22. Click Back to go to the Flow overview page 
 ![Click on Back](images/ClickOnBack.jpg)
 
 
-24. On the right side of the screen scroll down until you find the Run only Users and choose Edit. 
+23. On the right side of the screen scroll down until you find the Run only Users and choose Edit. 
 ![Edit Run Only Users](images/RunOnlyUsersEdit.jpg)
 
-25. Choose your connection name and click OK in the warning. Then click on Save
+24. Choose your connection name and click OK in the warning. Then click on Save
 ![Select Connection and Save](images/SelectOKSave.jpg)
 
 
-27. Go back to Copilot Studio and Click on Refresh
+25. Go back to Copilot Studio and Click on Refresh
 ![Click on Refresh](images/ClickOnRefresh.jpg)
 
 > [!TIP]
@@ -286,10 +288,10 @@ Click Done and you should see the successfully run. Select the Read OData entity
 > Select to + Add an action again
 
 
-28. Search on the flow you just created *Get Tradingcontract-<YOUR NAME>* and select it
+26. Search on the flow you just created *Get Tradingcontract-<YOUR NAME>* and select it
 ![Select the new flow](images/SelectTheNewFlow.jpg)
 
-29. Leave teh Name as is, but add the following text to the *Description for the agent to know when to use this action*. Then click on *Add Action*
+27. Leave the Name as is, but add the following text to the *Description for the agent to know when to use this action*. Then click on *Add Action*
 
 
 Description for the agent to know then to use this action:
@@ -325,15 +327,14 @@ This action retrieves a list of trading contracts and their status from the SAP 
 ![Add Description](images/AddDescription.jpg)
 
 > [!TIP]
-> Creatingn the a good description is important. Via this description Copilot Studio decides which action to call when a user asks a questions.
+> Creating the a good description is important. Via this description Copilot Studio decides which action to call when a user asks a questions.
 
-Select Next leaving the default Inputs and Outputs inherited from the flow.
-> Select Finish after all 3 steps have been completed
+28. Select Next leaving the default Inputs and Outputs inherited from the flow. Select Finish after all 3 steps have been completed
 
-30. Once the Action is successfully added, click on the 
+29. Once the Action is successfully added, click on the 
 ![Enable Generative AI](images/GenerativeAI.jpg)
 
-31. Select *Generative (Preview)*, click on *Save* and close the Setting screen.
+30. Select *Generative (Preview)*, click on *Save* and close the Setting screen.
 ![Enable Generative](images/EnableAI.jpg)
 
 
@@ -346,10 +347,8 @@ Let’s see if you can query some information about trading contracts.
 1. Launch the Test pane
 ![Toggle Test Pane](images/SelectTestPane.jpg)
 
-2. Ask a question to check how many trading contracts are in the system:
-````text
-How many trading contracts do we have in the system?
-````
+2. Ask a question to check how many trading contracts are in the system: ````
+How many trading contracts do we have in the system?````
 ![How many trading contracts](images/HowManyTrading.jpg)
 
 > [!TIP]
@@ -357,9 +356,9 @@ How many trading contracts do we have in the system?
 
 3. Test with other questions:
 
-* how many trading contracts do we have in our system?
-* what's the overall trading contract value?
-* Give me details on trading contract 3110000001
+* ````how many trading contracts do we have in our system?````
+* ````what's the overall trading contract value?````
+* ````Give me details on trading contract 3110000001````
 
 > [!TIP]
 > Since we did not specify the description of the knowledge source, this can lead to confusion. Either optimise the description or -- for this test -- delete the added content
