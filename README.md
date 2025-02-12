@@ -1,4 +1,4 @@
-# CopilotStudio SAP
+# Copilot Studio & SAP - Trading Contracts
 Getting started with Copilot Studio and SAP
 
 This tutorial walks through two simple scenarios:
